@@ -1,10 +1,9 @@
 Axis2GE <-
 function(coords, maxVal, maxAlt = 1e+05, lwd = 2, apnd = TRUE, goo = "testAxis.kml"){
-
-  if(apnd == FALSE){
-    bloc1 = NULL
-    bloc2 = NULL
-    }
+  
+  # initiate storages
+  bloc1 = NULL
+  bloc2 = NULL
 
   ### Compute axis coordinates
   # get ticks along axis and their altitudes
@@ -51,7 +50,6 @@ function(coords, maxVal, maxAlt = 1e+05, lwd = 2, apnd = TRUE, goo = "testAxis.k
     cat(bloc1, bloc2, file=goo,append=T)
     cat("\t</Document>\n</kml>",file=goo, append=T)
     } else {
-    assign("bloc1", bloc1, envir = .GlobalEnv)
-    assign("bloc2", bloc2, envir = .GlobalEnv)
+    list(bloc1 = bloc1, bloc2 = bloc2)
     }
   }

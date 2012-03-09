@@ -24,14 +24,14 @@ The height (ceiling altitude) of the Y-axis into Google Earth (in meters).
 Line widths used to draw the axis.
 }
   \item{apnd}{
-Should the Y-axis be appended to an existing KML that is under production (append = TRUE, to be used if Axis2GE is embedded in another KML generating function) or should it be saved in its own KML file (append = FALSE)?
+Should the Y-axis be appended to an existing KML that is under production (append = TRUE, to be used if Axis2GE is embedded in another KML generating function, see details) or should it be saved in its own KML file (append = FALSE)?
 }
   \item{goo}{
 To be provided if apnd = FALSE, name of the KML file to that will be saved into the working directory (use getwd() to find it).
 }
 }
 \details{
-If apnd == TRUE, the present function will update the style (bloc1) and data (bloc2) sections of the KML file that is being generated. The results are directly assigned into the global environment.
+If apnd == TRUE, Axis2GE will provide a list containing the style (bloc1) and data (bloc2) sections of a standard KML file. These sections are then to be incorporated directly into the KML file being generated.
 }
 \author{
 Nils Arrigo, nils.arrigo@gmail.com                                          
@@ -41,11 +41,22 @@ Nils Arrigo, nils.arrigo@gmail.com
 \code{\link{contourLines}}
 }
 \examples{
+# Producing an axis as an additional KML file
 Axis2GE(coords = c(1,1),
 	maxVal = 6698, 
 	maxAlt = 1e5, 
 	lwd = 2, 
 	apnd = FALSE, 
 	goo = "Demo_Axis2GE.kml")
+
+# Producing an axis, but storing the KML sections for later use
+DemoAxis = Axis2GE(coords = c(1,1),
+		   maxVal = 6698, 
+		   maxAlt = 1e5, 
+		   lwd = 2, 
+		   apnd = TRUE)
+attributes(DemoAxis) #check out the contents of the obtained list
+DemoAxis$bloc1 #get the styles section
+DemoAxis$bloc2 #get the coordinates section
 }
 

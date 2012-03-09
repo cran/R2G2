@@ -37,6 +37,7 @@ function(center, obs, nedges = 3, radius = 50000, orient = 0, diag = FALSE){
     area.bound = data.frame(prop, area.edge, f.edge)
     area.bound = area.bound[ 2:(nrow(area.bound) - 1),]
     }
+
   ### Compute Pie coordinates
   #Get edge limits (startDD and stopDD of ead edge)
   edges.fig = GetEdges(center, radius, nedges, orient)
@@ -89,12 +90,6 @@ function(center, obs, nedges = 3, radius = 50000, orient = 0, diag = FALSE){
     for(i in 1:(nsct-1)){
       tmp = coords[ coords[, 1] == i , 2:3]
       end = coords[ coords[, 1] == i+1 , 2:3]
-      if(is.null(nrow(end))){ 
-	assign("last", end, envir = .GlobalEnv)
-	} else {
-	assign("last", end[1, ], envir = .GlobalEnv)
-	}
-
       topol = rbind(center, tmp, end, center)
       polygon(topol, col = magic[i])
       }
@@ -103,4 +98,3 @@ function(center, obs, nedges = 3, radius = 50000, orient = 0, diag = FALSE){
   # and return output
   coords
   } #end of FancyPies
-

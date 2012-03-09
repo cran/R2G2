@@ -1,5 +1,4 @@
-Phylo2GE <-
-function(geo, phy, resol=.1, minAlt = 1e4, maxAlt = 2e6, goo='Phylo2GE.kml'){  
+Phylo2GE <- function(geo, phy, resol=.1, minAlt = 1e4, maxAlt = 2e6, goo='Phylo2GE.kml'){  
 
   ## Match phy and geo, make sure that both share their tips and are ordered similarly
   # Note that geo is matched on phy, so geo must contain all the tips of phy, extra taxa of geo are discarded
@@ -19,7 +18,11 @@ function(geo, phy, resol=.1, minAlt = 1e4, maxAlt = 2e6, goo='Phylo2GE.kml'){
     if(length(childs) > 2){
       anc.geo = c(i, colMeans(desc))
       } else {
-      anc.geo = c(i, curvy(.5, desc[1, ], desc[2, ]))
+      if(sum(desc[1, ] == desc[2, ]) == 0) { # if the node's descendants have distinct coordinates
+	anc.geo = c(i, curvy(.5, desc[1, ], desc[2, ]))
+	} else { # if the node's descendants have the same coordinates
+	anc.geo = c(i, as.numeric(desc[1, ]))
+	}
       }
     geo.childs = rbind(geo.childs, anc.geo)
     }
@@ -65,8 +68,13 @@ function(geo, phy, resol=.1, minAlt = 1e4, maxAlt = 2e6, goo='Phylo2GE.kml'){
     seg = phy$edge[i, ]
     startDD = meta[seg[1], 2:4]
     stopDD = meta[seg[2], 2:4]
-
-    tmp = t(sapply(seq(0, 1, by = .05), curvy, startDD, stopDD))
+    
+    # here we draw the vertical bars of the tree (i.e. those uniting edges at a given ancestral node)
+    if(sum(startDD[-3] == stopDD[-3]) == 0){ #if the node's descendants have disctinct geographical coords
+      tmp = t(sapply(seq(0, 1, by = resol), curvy, startDD, stopDD))
+      } else { #if the node's descendants have the same geographical coords
+      tmp = matrix(rep(unlist(startDD[1:2]), each = 3), 3, 2)
+      }
     pts = cbind(tmp, rep(as.numeric(startDD[3]), nrow(tmp)))
     str = NULL
     for(j in 1:nrow(pts)){
@@ -79,4 +87,3 @@ function(geo, phy, resol=.1, minAlt = 1e4, maxAlt = 2e6, goo='Phylo2GE.kml'){
     }
   cat("</Folder></Document>\n</kml>", file=goo, append = TRUE)
   }
-

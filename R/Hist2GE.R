@@ -1,7 +1,7 @@
 Hist2GE <-
 function(coords, species = 0, grid, goo, nedges, orient, maxAlt = 1e5, colors = "auto", ...){
   ## Prepare input data
-  if(species == 0) species = rep("nospecies", nrow(coords))
+  if(species == 0 | length(species) == 0 | length(species) < nrow(coords)) species = rep("nospecies", nrow(coords))
 
   coords = data.frame(lon = as.numeric(as.character(coords[, 1])), 
 		      lat = as.numeric(as.character(coords[, 2])),

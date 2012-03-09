@@ -15,7 +15,7 @@ PolyLines2GE(coords, nesting = 0, maxAlt = 10000, goo = "Lines2GE.kml", colors =
 Array of geographical positions that define each line / polygon edges (latitude, longitude, in Decimal Degrees). The coordinates must be provided following counterclockwise order if you wish to draw closed polygons (this is actually required by Google Earth, in order to obtain a proper colors rendering).
 }
   \item{nesting}{
-Vector for identifying distinct lines / polygons, must correspond to "coords" and should be designated as numbers.
+Vector for identifying distinct lines / polygons, must correspond to "coords" and should be designated as numbers. The resulting lines / polygons are then stored into distinct folders. If used, this option expects that one color is defined for each nesting level (see color parameter below).
 }
   \item{maxAlt}{
 The height (ceiling altitude) of the lines / polygons (one maxAlt per line / polygon or one maxAlt for all lines / polygons). Note that point specific altitudes can be declared (maxAlt then includes the altitudes of all points in "coords")
@@ -24,7 +24,7 @@ The height (ceiling altitude) of the lines / polygons (one maxAlt per line / pol
 Name of the KML file to that will be saved into the working directory (use getwd() to find it).
 }
   \item{colors}{
-Vector of colors (one color per line / polygon or one color for all lines / polygons). Must be defined as hexadecimal values (as produced by usual R color palettes); leave to "auto" to get rainbow colors
+Vector of colors (if the nesting option is used, define one color per line / polygon; if no nesting is specified, the same color is applied on all lines / polygons). Must be defined as hexadecimal values (as produced by usual R color palettes); leave to "auto" to get rainbow colors
 }
   \item{extrude}{
 3D rendering: 1 = extend polygon vertical faces to the ground, 0 = draw only polygon.
@@ -160,7 +160,7 @@ PolyLines2GE(coords = fakedata[, 2:3],
 #Prepare data
 data(volcano)
 lat = seq(1, 6, length.out = nrow(volcano))
-lon = seq(1, 6, length.out = nrow(volcano))
+lon = seq(1, 6, length.out = ncol(volcano))
 
 #Get contour lines
 cont = contourLines(lat, lon, volcano, nlevels = 20)
