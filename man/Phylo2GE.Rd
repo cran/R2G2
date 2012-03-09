@@ -49,17 +49,18 @@ Nils Arrigo, nils.arrigo@gmail.com
 }
 }
 \examples{
-#require(ape)
-#require(picante)
-#geo = data.frame(taxa = c("D", "E", "A", "B", "C", "F"), 
+# uncomment to use
+# require(ape)
+# require(picante)
+# geo = data.frame(taxa = c("D", "E", "A", "B", "C", "F"), 
 #	 lon = c(9.291113, 23.18146, 75.274541, -8.653739, 11.622450, 12.622450),
 #	 lat = c(8.774068, 4.581856, 48.078570, 10.966451, 28.722732, 29.722732))
-#geo
+# geo
 
-#phy = "(((B:0.41,C:0.31):0.65,(D:0.21,E:0.11):0.75):0.85,A:0.51);"
-#phy = read.tree(text = phy)
+# phy = "(((B:0.41,C:0.31):0.65,(D:0.21,E:0.11):0.75):0.85,A:0.51);"
+# phy = read.tree(text = phy)
 
-#Phylo2GE(geo, phy, resol = .05, goo = 'Demo_Phylo2GE.kml')
+# Phylo2GE(geo, phy, resol = .05, goo = 'Phylo2GE.kml')
 }
 
 \keyword{ phylogeny }

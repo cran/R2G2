@@ -28,10 +28,25 @@ Nils Arrigo, nils.arrigo@gmail.com
 2012 EEB, the University of Arizona, Tucson
 }
 \examples{
+#Converting grid50 (radians) to usual decimal degrees
 data(grid50)
+Rad2DD = function(lon, lat){
+  lonDD = 360 * round((lon / (2 * pi)), 5) - 180 + 0.01
+  latDD = 180 * round(lat / pi, 5) - 90 + 0.01
+  cbind(lonDD, latDD)
+  }
+grid50DD = Rad2DD(grid50[,2], grid50[, 3])
+grid50DD
 
-lon = 360 * round((grid50[, 2] / (2 * pi)), 5) - 180 + 0.01
-lat = 180 * round(grid50[, 3] / pi, 5) - 90 + 0.01
-grid = data.frame(lon = lon, lat = lat)
+#Converting decimal degrees to grid50 format (radians and properly centered)
+DD2Rad = function(lon, lat){
+  lonrad = (lon + 180) * pi/180
+  latrad = (lat + 90) * pi/180
+  cbind(lonrad, latrad)
+  }
+grid50Rad = DD2Rad(grid50DD[ ,1], grid50DD[ ,2])  
+grid50Rad = data.frame("1", grid50Rad) #this step is only cosmetic and necessary for compatibily issues.
+grid50Rad
 }
+
 

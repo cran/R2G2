@@ -20,7 +20,7 @@ function(coords, species = 0, grid, goo, nedges, orient, maxAlt = 1e5, colors = 
 
   ## get grid radius and cells spacing
   a.cste = 6378137
-  delta = diff(precomp[1:2, 3]) * a.cste / 2
+  delta = max(diff(precomp[, 3])) * a.cste / 2
   spacing = min(abs(diff(grid[, 1])))
 
 

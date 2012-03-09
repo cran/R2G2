@@ -12,8 +12,8 @@ This package includes a set of functions for producing basic and complex represe
 \tabular{ll}{
 Package: \tab R2G2\cr
 Type: \tab Package\cr
-Version: \tab 1.0\cr
-Date: \tab 2012-03-09\cr
+Version: \tab 1.0-1\cr
+Date: \tab 2012-10-02\cr
 License: \tab LGPL\cr
 LazyLoad: \tab yes\cr
 }
@@ -28,6 +28,7 @@ Basic features: functions to overlay R CRAN plots, dots, lines, custom and regul
 \code{Plots2GE - Georeferencing custom R plots into Google Earth}
 \code{Dots2GE - Automated placement of observations, as dots, in Google Earth}
 \code{Axis2GE - Automated placement of a Y-axis in Google Earth}
+\code{Overlay2GE - Automated placement of an overlayed image in Google Earth}
 
 ## Internal functions:
 \code{curvy - Compute spherical coordinates of points along an arc}
